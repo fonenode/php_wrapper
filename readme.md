@@ -1,4 +1,4 @@
-This is the PHP wrapper for the [Fonenode API](http://fonenode.com/docs).
+This is the PHP wrapper for the [Fonenode API](http://fonenode.com/docs). More methods coming soon.
 
 ##Init
 
