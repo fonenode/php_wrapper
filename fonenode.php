@@ -5,7 +5,7 @@
  * https://github.com/fonenode/php_wrapper
  *
  * @author Opeyemi Obembe (@kehers) <ope@fonenode.com>
- * @version 0.9.1
+ * @version 0.9.2
  */
  
 require 'exceptions.php';
@@ -16,7 +16,7 @@ class fonenode {
 	private $_status;
 	private $_auth_id;
 	private $_auth_secret;
-	public $_api_root = "http://api.fonenode.com/v1/";
+	public $_api_root = "https://api.fonenode.com/v1/";
 
 	/*
 	 * Constructor
@@ -265,6 +265,9 @@ class fonenode {
 		
 		curl_setopt($ch, CURLOPT_URL, $callurl);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// set to 0 to not verify ssl
+		curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__).'/cert_bundle.crt');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_USERPWD, $this->_auth_id.':'.$this->_auth_secret);
 		
 		if (isset($data)) {
@@ -273,6 +276,7 @@ class fonenode {
 		}
 		
 		$response = curl_exec($ch);
+		echo curl_error($ch);
 		$this->_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 		
