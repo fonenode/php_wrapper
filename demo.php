@@ -1,9 +1,9 @@
 <pre><?php
 require 'fonenode.php';
-$fonenode = new fonenode('__auth_id___', '__auth_key___');
+$fonenode = new fonenode('__auth_id__', '__auth_secret__');
 
 // Quick call
-// print_r($fonenode->quick_call('23480___', 'Hey'));
+ print_r($fonenode->quick_call('2348039216109', 'This is an automated test'));
 // Call (with response id)
 // print_r($fonenode->call('23470____', '___response_id___'));
 // List calls

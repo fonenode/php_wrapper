@@ -12,9 +12,14 @@ This is the PHP wrapper for the [Fonenode API](http://fonenode.com/docs). More m
 4. get_call (id)
 
 ##Responses
-1. list_responses ([limit], [offset])
-2. get_response (id)
-3. delete_response (id)
+1. create_response (parameter_array)
+2. list_responses ([limit], [offset])
+3. get_response (id)
+4. delete_response (id)
+
+##Numbers
+1. list_my_numbers ([limit], [offset])
+3. update_number_response (number_id, respomse_id)
 
 ##Billing
 1. list_bills ([limit], [offset], [filter])
