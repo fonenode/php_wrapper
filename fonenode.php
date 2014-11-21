@@ -279,13 +279,40 @@ class fonenode {
     /*
      * Private methods
      */
+     
+    private function _build_post_query($data, $prefix = null) {
+
+        $query = array();
+        
+        foreach ($data as $key => $value) {
+            $k = isset($prefix) ? $prefix . '[' . $key . ']' : $key;
+            if (is_array($value)) {
+                $query += $this->_build_post_query($value, $k);
+            } else {
+                $query[$k] = $value;
+            }
+        }
+
+        return $query;
+    }
+    
+    private function build_post_query($data) {
+
+        $arr = $this->_build_post_query($data);
+        foreach ($arr as $k => $v) {
+            $query .= $k.'='.urlencode($v).'&';
+        }
+        
+        return substr($query, 0, -1);
+    }
     
     private function get($url) {
         return $this->http($url);
     }
     
     private function post($url, $data) {
-        return $this->http($url, $data);
+        $query = $this->build_post_query($data);
+        return $this->http($url, $query);
     }
     
     private function put($url, $data) {
